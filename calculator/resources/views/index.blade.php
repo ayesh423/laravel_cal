@@ -6,106 +6,122 @@
     <title>Basic Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e5e5e5;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
         }
-        
+
         .calculator {
-            background-color: #333;
-            border-radius: 10px;
+            background-color: #1e1e1e;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
             padding: 20px;
-            width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 320px;
         }
-        
+
         .display {
-            background-color: #eee;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            font-size: 28px;
             padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
             text-align: right;
-            font-size: 24px;
-            height: 30px;
+            margin-bottom: 20px;
+            color: #000;
+            min-height: 40px;
+            overflow-x: auto;
         }
-        
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
-        
+
         button {
-            border: none;
-            padding: 15px;
+            padding: 20px;
             font-size: 18px;
-            border-radius: 5px;
+            border-radius: 10px;
+            border: none;
+            background-color: #444;
+            color: #fff;
             cursor: pointer;
-            background-color: #555;
-            color: white;
+            transition: background-color 0.2s ease;
         }
-        
+
         button:hover {
-            background-color: #777;
+            background-color: #555;
         }
-        
+
         .operator {
             background-color: #ff9500;
         }
-        
+
         .operator:hover {
-            background-color: #ffaa33;
+            background-color: #ffa733;
         }
-        
+
         .equals {
             background-color: #28a745;
+            grid-column: span 1;
         }
-        
+
         .equals:hover {
             background-color: #34ce57;
         }
-        
+
         .clear {
             background-color: #dc3545;
         }
-        
+
         .clear:hover {
             background-color: #e4606d;
+        }
+
+        .zero {
+            grid-column: span 2;
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">0</div>
-        <div class="buttons">
-            <button class="clear">C</button>
-            <button>±</button>
-            <button>%</button>
-            <button class="operator">÷</button>
-            
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="operator">×</button>
-            
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button class="operator">-</button>
-            
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button class="operator">+</button>
-            
-            <button style="grid-column: span 2;">0</button>
-            <button>.</button>
-            <button class="equals">=</button>
+    <form action="{{ route('calculator') }}" method="POST">
+        @csrf
+        <div class="calculator">
+            <div class="display">{{ session('answer', 0) }}</div>
+            <div class="buttons">
+                <!-- Row 1 -->
+                <button type="submit" name="input" value="C" class="clear">C</button>
+                <button type="submit" name="input" value="±">±</button>
+                <button type="submit" name="input" value="%">%</button>
+                <button type="submit" name="input" value="÷" class="operator">÷</button>
+
+                <!-- Row 2 -->
+                <button type="submit" name="input" value="7">7</button>
+                <button type="submit" name="input" value="8">8</button>
+                <button type="submit" name="input" value="9">9</button>
+                <button type="submit" name="input" value="×" class="operator">×</button>
+
+                <!-- Row 3 -->
+                <button type="submit" name="input" value="4">4</button>
+                <button type="submit" name="input" value="5">5</button>
+                <button type="submit" name="input" value="6">6</button>
+                <button type="submit" name="input" value="-" class="operator">-</button>
+
+                <!-- Row 4 -->
+                <button type="submit" name="input" value="1">1</button>
+                <button type="submit" name="input" value="2">2</button>
+                <button type="submit" name="input" value="3">3</button>
+                <button type="submit" name="input" value="+" class="operator">+</button>
+
+                <!-- Row 5 -->
+                <button type="submit" name="input" value="0" class="zero">0</button>
+                <button type="submit" name="input" value=".">.</button>
+                <button type="submit" name="input" value="=" class="equals">=</button>
+            </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>
